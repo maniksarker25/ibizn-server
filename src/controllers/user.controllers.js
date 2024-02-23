@@ -17,7 +17,7 @@ const { generateToken } = require("../config/jwtConfig");
 const createUser = catchAsync(async (req, res) => {
   const result = await createUserIntoDB(req.body);
   const mailer = await transporter.sendMail({
-    from: "deapth.search.it@gmail.com", // sender address
+    from: "maniksarker265@gmail.com", // sender address
     to: req?.body?.email, // list of receivers
     subject: "Email Verification", // Subject line
     text: "Verification", // plain text body
@@ -25,8 +25,7 @@ const createUser = catchAsync(async (req, res) => {
     <h1>Welcome to Infinite Blue</h1>
     <br/>
     <p>To verify your email please <a href=${
-      "https://ibizn-operator-client.vercel.app/userVerification/" +
-      generateToken(result)
+      "https://ibzn-latest.vercel.app/userVerification/" + generateToken(result)
     }>click here</a></p>
     </div>`, // html body
   });
