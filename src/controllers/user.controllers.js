@@ -11,7 +11,6 @@ const {
 } = require("../services/user.services");
 const User = require("../models/user.model");
 const catchAsync = require("../utilities/catchAsync");
-const AppError = require("../error/appError");
 const transporter = require("../config/smtp");
 const { generateToken } = require("../config/jwtConfig");
 const createUser = catchAsync(async (req, res) => {
