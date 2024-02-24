@@ -16,7 +16,7 @@ const { generateToken } = require("../config/jwtConfig");
 const createUser = catchAsync(async (req, res) => {
   const result = await createUserIntoDB(req.body);
   const mailer = await transporter.sendMail({
-    from: "maniksarker265@gmail.com", // sender address
+    from: "devsmanik@gmail.com", // sender address
     to: req?.body?.email, // list of receivers
     subject: "Email Verification", // Subject line
     text: "Verification", // plain text body
