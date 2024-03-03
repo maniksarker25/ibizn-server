@@ -22,7 +22,7 @@ const resortEquipmentRoutes = require("./routes/resortEquipment.routes");
 const resortDiveCourseRoutes = require("./routes/resortDiveCourse.routes");
 const boatFacilityRoutes = require("./routes/boatFacility.routes");
 const boatExclusionRoutes = require("./routes/boatExclusion.routes");
-// const boatInclusionRoutes = require("./routes/BoatInclusion.routes");
+const boatInclusionRoutes = require("./routes/boatInclusion.routes");
 const boatEquipmentRoutes = require("./routes/boatEquipment.routes");
 const boatDiveCourseRoutes = require("./routes/boatDiveCourse.routes");
 const bankInformationRoutes = require("./routes/bankInformation.routes");
@@ -41,7 +41,7 @@ app.use("/api/resort-equipments", resortEquipmentRoutes);
 app.use("/api/resort-dive-courses", resortDiveCourseRoutes);
 // boats items
 app.use("/api/boat-facilities", boatFacilityRoutes);
-// app.use("/api/boat-inclusions", boatInclusionRoutes);
+app.use("/api/boat-inclusions", boatInclusionRoutes);
 app.use("/api/boat-exclusions", boatExclusionRoutes);
 app.use("/api/boat-equipments", boatEquipmentRoutes);
 app.use("/api/boat-dive-courses", boatDiveCourseRoutes);
