@@ -6,10 +6,18 @@ const createResortIntoDB = async (userData, payload) => {
   return result;
 };
 
+
 const getResortsFromDB = async (id) => {
   const result = await Resort.find({ user: id });
   return result;
 };
+// get single resort
+const getSingleResotFromDB = async(id)=>{
+ 
+  const result = await Resort.findById(id,{carousalImages:false,rooms:false,food:false,diving:false,accommodation:false});
+  // console.log({result});
+  return result;
+}
 
 // delete resort fromdb
 const deleteResortFromDB = async (id) => {
@@ -18,7 +26,7 @@ const deleteResortFromDB = async (id) => {
 };
 // get all pending resorts from db
 const getAllPendingResortFromDB = async () => {
-  const result = await Resort.find({ status: "pending" });
+  const result = await Resort.find({ status: "pending" },{propertyName:true,status: true});
   return result;
 };
 // get all approved resorts from db
@@ -40,4 +48,5 @@ module.exports = {
   getAllPendingResortFromDB,
   getAllApprovedResortFromDB,
   updateResortFromDB,
+  getSingleResotFromDB
 };

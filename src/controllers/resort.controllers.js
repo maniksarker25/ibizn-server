@@ -6,6 +6,7 @@ const {
   getAllPendingResortFromDB,
   getAllApprovedResortFromDB,
   updateResortFromDB,
+  getSingleResotFromDB,
 } = require("../services/resort.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -30,6 +31,18 @@ const getResorts = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+const getSingleResort = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await getSingleResotFromDB(id)
+  
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Resort is retrieved successfully",
+    data: result,
+  });
+})
 
 // delete resort
 const deleteResort = catchAsync(async (req, res) => {
@@ -82,4 +95,5 @@ module.exports = {
   getAllPendingResort,
   getAllApprovedResort,
   updateResort,
+  getSingleResort
 };

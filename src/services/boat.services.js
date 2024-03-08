@@ -23,7 +23,7 @@ const getApprovedBoatsFromDB = async () => {
 };
 // get all pending boats from db
 const getAllPendingBoatsFromDB = async () => {
-  const result = await Boat.find({ status: "pending" });
+  const result = await Boat.find({ status: "pending" }, {nameOfProperty:true,status:true});
   return result;
 };
 
