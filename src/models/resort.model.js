@@ -212,12 +212,12 @@ const resortSchema = new Schema(
       required: true,
     },
     equipmentAvailable: {
-      type: Boolean,
-      default: false,
+      type: [String],
+      required: true,
     },
     diveCourseAvailable: {
-      type: Boolean,
-      default: false,
+      type: [String],
+      required: true,
     },
     discount: {
       type: String,
