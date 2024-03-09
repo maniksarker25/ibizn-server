@@ -211,11 +211,11 @@ const resortSchema = new Schema(
       type: [String],
       required: true,
     },
-    equipmentAvailable: {
+    equipment: {
       type: [String],
       required: true,
     },
-    diveCourseAvailable: {
+    diveCourses: {
       type: [String],
       required: true,
     },
