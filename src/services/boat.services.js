@@ -29,7 +29,7 @@ const getAllPendingBoatsFromDB = async () => {
 
 // get single boat from db
 const getSingleBoatFromDB = async(id)=>{
-  const result = await Boat.findById(id);
+  const result = await Boat.findById(id,{carousal:false,liveABoard:false,accommodation:false,diving:false,foodOnboard:false,cabins:false});
   return result;
 }
 
