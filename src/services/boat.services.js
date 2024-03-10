@@ -27,6 +27,12 @@ const getAllPendingBoatsFromDB = async () => {
   return result;
 };
 
+// get single boat from db
+const getSingleBoatFromDB = async(id)=>{
+  const result = await Boat.findById(id);
+  return result;
+}
+
 // update boat
 const updateBoatFromDB = async (id, payload) => {
   const result = await Boat.findByIdAndUpdate(id, payload, {
@@ -42,4 +48,5 @@ module.exports = {
   getApprovedBoatsFromDB,
   getAllPendingBoatsFromDB,
   updateBoatFromDB,
+  getSingleBoatFromDB
 };

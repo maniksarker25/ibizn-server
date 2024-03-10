@@ -7,6 +7,7 @@ const {
   getApprovedBoats,
   getAllPendingBoats,
   updateBoat,
+  getSingleBoat,
 } = require("../controllers/boat.controllers");
 const boatRoutes = express.Router();
 
@@ -15,5 +16,6 @@ boatRoutes.get("/", auth("operator"), getBoats);
 boatRoutes.delete("/delete-boat/:id", auth("operator"), deleteBoat);
 boatRoutes.get("/approved-boats", auth("admin"), getApprovedBoats);
 boatRoutes.get("/pending-boats", auth("admin"), getAllPendingBoats);
+boatRoutes.get("/single-boat/:id",  getSingleBoat);
 boatRoutes.put("/update-boat/:id", auth("admin"), updateBoat);
 module.exports = boatRoutes;
