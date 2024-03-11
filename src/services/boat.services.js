@@ -1,3 +1,5 @@
+const httpStatus = require("http-status");
+const AppError = require("../error/appError");
 const Boat = require("../models/boat.model");
 
 const createBoatIntoDB = async (userData, payload) => {
@@ -23,15 +25,25 @@ const getApprovedBoatsFromDB = async () => {
 };
 // get all pending boats from db
 const getAllPendingBoatsFromDB = async () => {
-  const result = await Boat.find({ status: "pending" }, {nameOfProperty:true,status:true});
+  const result = await Boat.find(
+    { status: "pending" },
+    { nameOfProperty: true, status: true }
+  );
   return result;
 };
 
 // get single boat from db
-const getSingleBoatFromDB = async(id)=>{
-  const result = await Boat.findById(id,{carousal:false,liveABoard:false,accommodation:false,diving:false,foodOnboard:false,cabins:false});
+const getSingleBoatFromDB = async (id) => {
+  const result = await Boat.findById(id, {
+    carousal: false,
+    liveABoard: false,
+    accommodation: false,
+    diving: false,
+    foodOnboard: false,
+    cabins: false,
+  });
   return result;
-}
+};
 
 // update boat
 const updateBoatFromDB = async (id, payload) => {
@@ -41,6 +53,29 @@ const updateBoatFromDB = async (id, payload) => {
   });
   return result;
 };
+
+// update single boat resitricted / unrestricted
+
+const updateSingleBoatFromDB = async (id) => {
+  const isExistBoat = await Boat.findById(id);
+  if (!isExistBoat) {
+    throw new AppError(httpStatus.NOT_FOUND, "Boat not found");
+  }
+  const payload = {
+    resitricted: isExistBoat?.resitricted
+      ? isExistBoat?.resitricted === true
+        ? false
+        : true
+      : true,
+  };
+
+  const result = await Boat.findByIdAndUpdate(id, payload,{
+    new: true,
+  })
+
+  return result;
+};
+
 module.exports = {
   createBoatIntoDB,
   getBoatsFromDB,
@@ -48,5 +83,6 @@ module.exports = {
   getApprovedBoatsFromDB,
   getAllPendingBoatsFromDB,
   updateBoatFromDB,
-  getSingleBoatFromDB
+  getSingleBoatFromDB,
+  updateSingleBoatFromDB,
 };

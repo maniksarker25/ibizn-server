@@ -8,6 +8,7 @@ const {
   getAllPendingBoats,
   updateBoat,
   getSingleBoat,
+  updateSingleBoat,
 } = require("../controllers/boat.controllers");
 const boatRoutes = express.Router();
 
@@ -18,4 +19,5 @@ boatRoutes.get("/approved-boats", auth("admin"), getApprovedBoats);
 boatRoutes.get("/pending-boats", auth("admin"), getAllPendingBoats);
 boatRoutes.get("/single-boat/:id",  getSingleBoat);
 boatRoutes.put("/update-boat/:id", auth("admin"), updateBoat);
+boatRoutes.put("/update-single-boat/:id", auth("admin"), updateSingleBoat);
 module.exports = boatRoutes;

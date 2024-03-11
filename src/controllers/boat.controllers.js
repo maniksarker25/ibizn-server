@@ -7,6 +7,7 @@ const {
   getAllPendingBoatsFromDB,
   updateBoatFromDB,
   getSingleBoatFromDB,
+  updateSingleBoatFromDB,
 } = require("../services/boat.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -86,6 +87,20 @@ const updateBoat = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+// resitricted / unrestricted 
+const updateSingleBoat = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await updateSingleBoatFromDB(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Boat updated successfully",
+    data: result,
+  });
+});
+
+
 module.exports = {
   createBoat,
   getBoats,
@@ -93,5 +108,6 @@ module.exports = {
   getApprovedBoats,
   getAllPendingBoats,
   updateBoat,
-  getSingleBoat
+  getSingleBoat,
+  updateSingleBoat
 };
