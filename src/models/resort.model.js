@@ -244,6 +244,10 @@ const resortSchema = new Schema(
       max: 5,
       min: 0,
     },
+    resitricted: {
+      type: Boolean,
+      default: false,
+    } 
   },
   {
     timestamps: true,

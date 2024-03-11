@@ -7,6 +7,7 @@ const {
   getAllApprovedResortFromDB,
   updateResortFromDB,
   getSingleResotFromDB,
+  updateSingleResortFromDB,
 } = require("../services/resort.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -87,6 +88,18 @@ const updateResort = catchAsync(async (req, res) => {
     data: result,
   });
 });
+// resitricted / unrestricted 
+const updateSingleResort = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await updateSingleResortFromDB(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Resort updated successfully",
+    data: result,
+  });
+});
+
 
 module.exports = {
   createResort,
@@ -95,5 +108,6 @@ module.exports = {
   getAllPendingResort,
   getAllApprovedResort,
   updateResort,
-  getSingleResort
+  getSingleResort,
+  updateSingleResort
 };
