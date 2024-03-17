@@ -4,11 +4,13 @@ const {
   createPackage,
   getAllPackage,
   deletePackage,
+  getSinglePackage,
 } = require("../controllers/package.controllers");
 
 const packageRoutes = express.Router();
 
 packageRoutes.post("/create-package", auth("operator"), createPackage);
 packageRoutes.get("/", auth("operator", "admin"), getAllPackage);
+packageRoutes.get('/single-package/:id',auth("operator", "admin"),getSinglePackage)
 packageRoutes.delete("/delete-package/:id", auth("operator"), deletePackage);
 module.exports = packageRoutes;

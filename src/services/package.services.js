@@ -11,6 +11,11 @@ const getAllPackageIntoDB = async (id) => {
   const result = await Package.find({ user: id });
   return result;
 };
+// get Single package into db
+const getSinglePackageIntoDB = async (id) => {
+  const result = await Package.findById(id);
+  return result;
+}
 
 // delete package fromdb
 const deletePackageFromDB = async (id) => {
@@ -22,4 +27,5 @@ module.exports = {
   createPackageIntoDB,
   getAllPackageIntoDB,
   deletePackageFromDB,
+  getSinglePackageIntoDB
 };

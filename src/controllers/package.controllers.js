@@ -5,6 +5,7 @@ const {
   createPackageIntoDB,
   getAllPackageIntoDB,
   deletePackageFromDB,
+  getSinglePackageIntoDB,
 } = require("../services/package.services");
 
 const createPackage = catchAsync(async (req, res) => {
@@ -29,6 +30,20 @@ const getAllPackage = catchAsync(async (req, res) => {
   });
 });
 
+// get Single Package
+
+const getSinglePackage = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await getSinglePackageIntoDB(id)
+
+sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Package is retrieved successfully",
+    data: result,
+  });
+})
+
 // delete itinerary
 const deletePackage = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -41,4 +56,4 @@ const deletePackage = catchAsync(async (req, res) => {
   });
 });
 
-module.exports = { createPackage, getAllPackage, deletePackage };
+module.exports = { createPackage, getAllPackage, deletePackage, getSinglePackage };
