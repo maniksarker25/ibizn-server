@@ -17,6 +17,14 @@ const getSinglePackageIntoDB = async (id) => {
   return result;
 }
 
+// package update From DB
+const updatePackageIntoDB = async (id,payload)=>{
+  const result = await Package.findByIdAndUpdate(id, payload,{
+    new:true
+  });
+  return result;
+}
+
 // delete package fromdb
 const deletePackageFromDB = async (id) => {
   const result = await Package.findByIdAndDelete(id);
@@ -27,5 +35,6 @@ module.exports = {
   createPackageIntoDB,
   getAllPackageIntoDB,
   deletePackageFromDB,
-  getSinglePackageIntoDB
+  getSinglePackageIntoDB,
+  updatePackageIntoDB
 };
