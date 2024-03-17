@@ -4,6 +4,7 @@ const {
   getItinerariesFromDB,
   deleteItineraryFromDB,
   getSingleIteneryFromDB,
+  updateSingleIteneryFromDB,
 } = require("../services/itinerary.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -38,6 +39,16 @@ const getSingleItineraries = catchAsync(async (req, res) => {
     data: result,
   });
 });
+// update  itinerary for operator -----
+const updateSingleItineraries = catchAsync(async (req, res) => {
+  const result = await updateSingleIteneryFromDB(req.params?.id,req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Itineraries is update successfully",
+    data: result,
+  });
+});
 
 // delete itinerary
 const deleteItinerary = catchAsync(async (req, res) => {
@@ -51,4 +62,4 @@ const deleteItinerary = catchAsync(async (req, res) => {
   });
 });
 
-module.exports = { createItinerary, getItineraries, deleteItinerary ,getSingleItineraries};
+module.exports = { createItinerary, getItineraries, deleteItinerary ,getSingleItineraries,updateSingleItineraries};

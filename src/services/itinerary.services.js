@@ -17,6 +17,11 @@ const getSingleIteneryFromDB = async (id) => {
   const result = await Itinerary.findById(id);
   return result;
 }
+// update Single itenery from db
+const updateSingleIteneryFromDB = async (id,payload) => {
+  const result = await Itinerary.findByIdAndUpdate(id, payload,{new :true});
+  return result;
+}
 
 // delete itineraries fromdb
 const deleteItineraryFromDB = async (id) => {
@@ -28,5 +33,6 @@ module.exports = {
   createItineraryIntoDB,
   getItinerariesFromDB,
   deleteItineraryFromDB,
-  getSingleIteneryFromDB
+  getSingleIteneryFromDB,
+  updateSingleIteneryFromDB
 };
