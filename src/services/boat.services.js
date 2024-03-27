@@ -34,14 +34,7 @@ const getAllPendingBoatsFromDB = async () => {
 
 // get single boat from db
 const getSingleBoatFromDB = async (id) => {
-  const result = await Boat.findById(id, {
-    carousal: false,
-    liveABoard: false,
-    accommodation: false,
-    diving: false,
-    foodOnboard: false,
-    cabins: false,
-  });
+  const result = await Boat.findById(id);
   return result;
 };
 
@@ -69,9 +62,9 @@ const updateSingleBoatFromDB = async (id) => {
       : true,
   };
 
-  const result = await Boat.findByIdAndUpdate(id, payload,{
+  const result = await Boat.findByIdAndUpdate(id, payload, {
     new: true,
-  })
+  });
 
   return result;
 };

@@ -18,6 +18,6 @@ resortRoutes.get("/single-resort/:id",  getSingleResort);
 resortRoutes.delete("/delete-resort/:id", auth("operator"), deleteResort);
 resortRoutes.get("/pending-resorts", auth("admin"), getAllPendingResort);
 resortRoutes.get("/approved-resorts", auth("admin"), getAllApprovedResort);
-resortRoutes.put("/update-resort/:id", auth("admin"), updateResort);
+resortRoutes.put("/update-resort/:id", auth("admin",'operator'), updateResort);
 resortRoutes.put("/update-single-resort/:id", auth("admin"), updateSingleResort);
 module.exports = resortRoutes;

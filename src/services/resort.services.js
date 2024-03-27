@@ -12,13 +12,7 @@ const getResortsFromDB = async (id) => {
 };
 // get single resort
 const getSingleResotFromDB = async (id) => {
-  const result = await Resort.findById(id, {
-    carousalImages: false,
-    rooms: false,
-    food: false,
-    diving: false,
-    accommodation: false,
-  });
+  const result = await Resort.findById(id);
   // console.log({result});
   return result;
 };
