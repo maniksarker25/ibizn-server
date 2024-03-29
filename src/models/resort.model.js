@@ -158,6 +158,10 @@ const resortSchema = new Schema(
       type: String,
       required: true,
     },
+    featureImage: {
+      type: String,
+      required: true,
+    },
     deactivationPeriod: {
       type: deactivationPeriodSchema,
     },
@@ -247,7 +251,7 @@ const resortSchema = new Schema(
     resitricted: {
       type: Boolean,
       default: false,
-    } 
+    },
   },
   {
     timestamps: true,
