@@ -248,6 +248,9 @@ const resortSchema = new Schema(
       max: 5,
       min: 0,
     },
+    foodBasedQuestionAnswer: {
+      type: String,
+    },
     resitricted: {
       type: Boolean,
       default: false,

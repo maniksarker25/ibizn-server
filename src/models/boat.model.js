@@ -131,7 +131,6 @@ const environmentalQuestionSchema = {
   q15: {
     type: String,
   },
-
 };
 const cabinsSchema = new Schema(
   {
@@ -204,10 +203,13 @@ const boatSchema = new Schema(
       max: 5,
       min: 0,
     },
+    foodBasedQuestionAnswer: {
+      type: String,
+    },
     resitricted: {
       type: Boolean,
       default: false,
-    } 
+    },
   },
   {
     timestamps: true,
