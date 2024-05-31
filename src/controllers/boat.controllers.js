@@ -8,6 +8,8 @@ const {
   updateBoatFromDB,
   getSingleBoatFromDB,
   updateSingleBoatFromDB,
+  getAllBoatFromDB,
+  getBoatSearchItemFromDB,
 } = require("../services/boat.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -22,6 +24,18 @@ const createBoat = catchAsync(async (req, res) => {
   });
 });
 
+// get all boats
+const getAllBoat = catchAsync(async (req, res) => {
+  const query = req.query;
+  const result = await getAllBoatFromDB(query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Boat retrieved successfully",
+    data: result,
+  });
+});
+
 // get boats
 const getBoats = catchAsync(async (req, res) => {
   const result = await getBoatsFromDB(req.user?.userId);
@@ -32,6 +46,18 @@ const getBoats = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+// get boat search item
+const getBoatSearchItem = catchAsync(async (req, res) => {
+  const result = await getBoatSearchItemFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Boats search item retrieved successfully",
+    data: result,
+  });
+});
+
 // delete boat
 const deleteBoat = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -66,7 +92,7 @@ const getAllPendingBoats = catchAsync(async (req, res) => {
 });
 // get single boats
 const getSingleBoat = catchAsync(async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params;
   const result = await getSingleBoatFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -88,7 +114,7 @@ const updateBoat = catchAsync(async (req, res) => {
   });
 });
 
-// resitricted / unrestricted 
+// resitricted / unrestricted
 const updateSingleBoat = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await updateSingleBoatFromDB(id);
@@ -100,14 +126,15 @@ const updateSingleBoat = catchAsync(async (req, res) => {
   });
 });
 
-
 module.exports = {
   createBoat,
+  getAllBoat,
   getBoats,
+  getBoatSearchItem,
   deleteBoat,
   getApprovedBoats,
   getAllPendingBoats,
   updateBoat,
   getSingleBoat,
-  updateSingleBoat
+  updateSingleBoat,
 };

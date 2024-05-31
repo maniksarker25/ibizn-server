@@ -10,6 +10,19 @@ const getResortsFromDB = async (id) => {
   const result = await Resort.find({ user: id });
   return result;
 };
+
+// get all resorts from db
+const getAllResortFromDB = async (queryData) => {
+  const result = await Resort.find();
+  return result;
+};
+
+// get resort search item
+const getResortSearchItemFromDB = async () => {
+  const result = await Resort.find().select("region country");
+  return result;
+};
+
 // get single resort
 const getSingleResotFromDB = async (id) => {
   const result = await Resort.findById(id);
@@ -67,7 +80,9 @@ const updateSingleResortFromDB = async (id) => {
 module.exports = {
   createResortIntoDB,
   getResortsFromDB,
+  getAllResortFromDB,
   deleteResortFromDB,
+  getResortSearchItemFromDB,
   getAllPendingResortFromDB,
   getAllApprovedResortFromDB,
   updateResortFromDB,

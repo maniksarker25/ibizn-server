@@ -9,11 +9,15 @@ const {
   updateBoat,
   getSingleBoat,
   updateSingleBoat,
+  getAllBoat,
+  getBoatSearchItem,
 } = require("../controllers/boat.controllers");
 const boatRoutes = express.Router();
 
 boatRoutes.post("/create-boat", auth("operator"), createBoat);
-boatRoutes.get("/", getBoats);
+boatRoutes.get("/all-boats", getAllBoat);
+boatRoutes.get("/", auth("operator"), getBoats);
+boatRoutes.get("/search-item", getBoatSearchItem);
 boatRoutes.delete("/delete-boat/:id", auth("operator"), deleteBoat);
 boatRoutes.get("/approved-boats", auth("admin"), getApprovedBoats);
 boatRoutes.get("/pending-boats", auth("admin"), getAllPendingBoats);
