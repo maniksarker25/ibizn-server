@@ -13,7 +13,28 @@ const getResortsFromDB = async (id) => {
 
 // get all resorts from db
 const getAllResortFromDB = async (queryData) => {
-  const result = await Resort.find();
+  const { destination, date, minRating, maxRating } = queryData;
+  const andCondition = [];
+  if (destination) {
+    andCondition.push({ country: destination });
+  }
+
+  if (date) {
+    const formattedDate = new Date(date);
+    andCondition.push({
+      $or: [
+        { "deactivationPeriod.startDate": { $gt: formattedDate } },
+        { "deactivationPeriod.endDate": { $lt: formattedDate } },
+      ],
+    });
+  }
+
+  // console.log(JSON.stringify(andCondition, null, 2));
+
+  const result = await Resort.find({
+    $and: andCondition.length > 0 ? andCondition : [{}],
+  });
+
   return result;
 };
 

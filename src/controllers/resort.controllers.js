@@ -9,6 +9,7 @@ const {
   getSingleResotFromDB,
   updateSingleResortFromDB,
   getResortSearchItemFromDB,
+  getAllResortFromDB,
 } = require("../services/resort.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -35,7 +36,7 @@ const getResorts = catchAsync(async (req, res) => {
 });
 // get all resort from db
 const getAllResort = catchAsync(async (req, res) => {
-  const result = await getResortsFromDB(req.query);
+  const result = await getAllResortFromDB(req.query);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
