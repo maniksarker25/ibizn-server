@@ -109,7 +109,12 @@ const getAllPendingBoatsFromDB = async () => {
 
 // get single boat from db
 const getSingleBoatFromDB = async (id) => {
-  const result = await Boat.findById(id);
+  const result = await Boat.findById(id)
+    .populate({
+      path: "schedules.itinerary",
+      model: "Itinerary", // Make sure to replace 'Itinerary' with the actual model name
+    })
+    .select("schedules nameOfProperty");
   return result;
 };
 
