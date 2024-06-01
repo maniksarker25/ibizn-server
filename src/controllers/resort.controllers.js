@@ -8,6 +8,8 @@ const {
   updateResortFromDB,
   getSingleResotFromDB,
   updateSingleResortFromDB,
+  getResortSearchItemFromDB,
+  getAllResortFromDB,
 } = require("../services/resort.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -32,18 +34,38 @@ const getResorts = catchAsync(async (req, res) => {
     data: result,
   });
 });
+// get all resort from db
+const getAllResort = catchAsync(async (req, res) => {
+  const result = await getAllResortFromDB(req.query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Resorts are retrieved successfully",
+    data: result,
+  });
+});
+// get resort search item
+const getResortSearchItem = catchAsync(async (req, res) => {
+  const result = await getResortSearchItemFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Resorts search item retrieved successfully",
+    data: result,
+  });
+});
 
 const getSingleResort = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await getSingleResotFromDB(id)
-  
+  const result = await getSingleResotFromDB(id);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "Resort is retrieved successfully",
     data: result,
   });
-})
+});
 
 // delete resort
 const deleteResort = catchAsync(async (req, res) => {
@@ -88,7 +110,7 @@ const updateResort = catchAsync(async (req, res) => {
     data: result,
   });
 });
-// resitricted / unrestricted 
+// resitricted / unrestricted
 const updateSingleResort = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await updateSingleResortFromDB(id);
@@ -100,14 +122,15 @@ const updateSingleResort = catchAsync(async (req, res) => {
   });
 });
 
-
 module.exports = {
   createResort,
   getResorts,
+  getAllResort,
   deleteResort,
+  getResortSearchItem,
   getAllPendingResort,
   getAllApprovedResort,
   updateResort,
   getSingleResort,
-  updateSingleResort
+  updateSingleResort,
 };
