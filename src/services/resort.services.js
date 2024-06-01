@@ -10,6 +10,40 @@ const getResortsFromDB = async (id) => {
   const result = await Resort.find({ user: id });
   return result;
 };
+
+// get all resorts from db
+const getAllResortFromDB = async (queryData) => {
+  const { destination, date, minRating, maxRating } = queryData;
+  const andCondition = [];
+  if (destination) {
+    andCondition.push({ country: destination });
+  }
+
+  if (date) {
+    const formattedDate = new Date(date);
+    andCondition.push({
+      $or: [
+        { "deactivationPeriod.startDate": { $gt: formattedDate } },
+        { "deactivationPeriod.endDate": { $lt: formattedDate } },
+      ],
+    });
+  }
+
+  // console.log(JSON.stringify(andCondition, null, 2));
+
+  const result = await Resort.find({
+    $and: andCondition.length > 0 ? andCondition : [{}],
+  });
+
+  return result;
+};
+
+// get resort search item
+const getResortSearchItemFromDB = async () => {
+  const result = await Resort.find().select("region country");
+  return result;
+};
+
 // get single resort
 const getSingleResotFromDB = async (id) => {
   const result = await Resort.findById(id);
@@ -67,7 +101,9 @@ const updateSingleResortFromDB = async (id) => {
 module.exports = {
   createResortIntoDB,
   getResortsFromDB,
+  getAllResortFromDB,
   deleteResortFromDB,
+  getResortSearchItemFromDB,
   getAllPendingResortFromDB,
   getAllApprovedResortFromDB,
   updateResortFromDB,
