@@ -10,37 +10,99 @@ const createBoatIntoDB = async (userData, payload) => {
 };
 
 // get all boat from db
+// const getAllBoatFromDB = async (queryData) => {
+//   const { destination, date, minRating, maxRating } = queryData;
+
+//   // Query the Itinerary collection to find matching itineraries
+//   const itineraries = await Itinerary.find({ country: destination });
+
+//   // Extract the itinerary IDs from the found itineraries
+//   const itineraryIds = itineraries.map((itinerary) => itinerary._id);
+
+//   // Build the query for boats with matching schedules
+//   const query = {
+//     schedules: {
+//       $elemMatch: {
+//         tripStart: { $lte: new Date(date) },
+//         tripEnd: { $gte: new Date(date) },
+//         itinerary: { $in: itineraryIds },
+//       },
+//     },
+//   };
+
+//   // Add veganRating condition if provided
+//   // if (minRating && maxRating) {
+//   //   query["veganRating"] = { $gte: minRating, $lte: maxRating };
+//   // }
+
+//   // Query the Boat collection with the constructed query
+//   const result = await Boat.find(query).populate({
+//     path: "schedules.itinerary",
+//     model: "Itinerary", // Make sure to replace 'Itinerary' with the actual model name
+//   });
+
+//   return result;
+// };
+
+// another ------------
 const getAllBoatFromDB = async (queryData) => {
   const { destination, date, minRating, maxRating } = queryData;
 
-  // Query the Itinerary collection to find matching itineraries
-  const itineraries = await Itinerary.find({ country: destination });
+  // Initialize an empty query object
+  const query = {};
 
-  // Extract the itinerary IDs from the found itineraries
-  const itineraryIds = itineraries.map((itinerary) => itinerary._id);
+  // Add destination condition if provided
+  if (destination) {
+    // Query the Itinerary collection to find matching itineraries
+    const itineraries = await Itinerary.find({ country: destination });
 
-  // Build the query for boats with matching schedules
-  const query = {
-    schedules: {
-      $elemMatch: {
-        tripStart: { $lte: new Date(date) },
-        tripEnd: { $gte: new Date(date) },
-        itinerary: { $in: itineraryIds },
-      },
-    },
-  };
+    // Extract the itinerary IDs from the found itineraries
+    const itineraryIds = itineraries.map((itinerary) => itinerary._id);
+
+    // Add itinerary condition to the query if itinerary IDs were found
+    if (itineraryIds.length > 0) {
+      query.schedules = {
+        $elemMatch: {
+          itinerary: { $in: itineraryIds },
+        },
+      };
+    }
+  }
+
+  // Add date condition if provided
+  if (date) {
+    const dateCondition = {
+      tripStart: { $lte: new Date(date) },
+      tripEnd: { $gte: new Date(date) },
+    };
+
+    // Add the date condition to the existing schedules query
+    if (query.schedules && query.schedules.$elemMatch) {
+      query.schedules.$elemMatch = {
+        ...query.schedules.$elemMatch,
+        ...dateCondition,
+      };
+    } else {
+      query.schedules = {
+        $elemMatch: dateCondition,
+      };
+    }
+  }
 
   // Add veganRating condition if provided
-  // if (minRating && maxRating) {
-  //   query["veganRating"] = { $gte: minRating, $lte: maxRating };
-  // }
+  if (minRating !== "" && maxRating !== "") {
+    console.log("raing");
+    query.veganRating = { $gte: minRating, $lte: maxRating };
+  }
 
   // Query the Boat collection with the constructed query
-  const result = await Boat.find(query);
+  const result = await Boat.find(query).populate({
+    path: "schedules.itinerary",
+    model: "Itinerary", // Make sure to replace 'Itinerary' with the actual model name
+  });
 
   return result;
 };
-
 // get boats for operators --------
 const getBoatsFromDB = async (id) => {
   const result = await Boat.find({ user: id });
