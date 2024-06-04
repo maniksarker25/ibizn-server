@@ -3,6 +3,7 @@ const {
   createBankInformationIntoDB,
   updateBankInformationIntoDB,
   getSingleBankInformationFromDB,
+  getOperatorBankInfoFromDB,
 } = require("../services/bankInformation.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -25,6 +26,16 @@ const getSingleBankInformation = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getOperatorBankInfo = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const result = await getOperatorBankInfoFromDB(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Operator bank information retrieved successfully",
+    data: result,
+  });
+});
 
 // update bank information
 const updateBankInformation = catchAsync(async (req, res) => {
@@ -40,5 +51,6 @@ const updateBankInformation = catchAsync(async (req, res) => {
 module.exports = {
   createBankInformation,
   updateBankInformation,
+  getOperatorBankInfo,
   getSingleBankInformation,
 };

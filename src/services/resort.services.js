@@ -46,7 +46,10 @@ const getResortSearchItemFromDB = async () => {
 
 // get single resort
 const getSingleResotFromDB = async (id) => {
-  const result = await Resort.findById(id);
+  const result = await Resort.findById(id).populate({
+    path: "user",
+    model: "User",
+  });
   // console.log({result});
   return result;
 };
@@ -61,7 +64,10 @@ const getAllPendingResortFromDB = async () => {
   const result = await Resort.find(
     { status: "pending" },
     { propertyName: true, status: true }
-  );
+  ).populate({
+    path: "user",
+    model: "User",
+  });
   return result;
 };
 // get all approved resorts from db
