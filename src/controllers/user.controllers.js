@@ -24,7 +24,7 @@ const createUser = catchAsync(async (req, res) => {
     <h1>Welcome to Infinite Blue</h1>
     <br/>
     <p>To verify your email please <a href=${
-      "https://ibzn-latest.vercel.app/userVerification/" + generateToken(result)
+      "http://localhost:3000/userVerification/" + generateToken(result)
     }>click here</a></p>
     </div>`, // html body
   });
