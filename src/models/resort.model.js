@@ -196,13 +196,17 @@ const resortSchema = new Schema(
       type: [String],
       required: true,
     },
-    listOfPackages: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Package",
-        required: true,
-      },
-    ],
+    listOfPackages: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Package",
+          required: true,
+        },
+      ],
+      required: true,
+    },
+
     rooms: {
       type: roomSchema,
       required: true,

@@ -9,7 +9,7 @@ const auth = (...requiredRoles) => {
     // check if the token is sent from client -----
     const token = req?.headers?.authorization;
     if (!token) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "Your are not authorized 2");
+      throw new AppError(httpStatus.UNAUTHORIZED, "Your are not authorized");
     }
     // check if the token is valid-
     const decoded = jwt.verify(token, config.jwt_secret);
