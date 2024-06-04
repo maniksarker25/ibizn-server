@@ -6,7 +6,7 @@ const cors = require("cors");
 app.use(express.json({ limit: "10mb" }));
 app.use(cors({ origin: "https://next-ibizn.vercel.app" }));
 // app.use(cors({ origin: "http://localhost:3000" }));
-
+// make some changes
 // import all routes ---------
 
 const globalErrorHandler = require("./utilities/globalErrorHandler");
