@@ -10,6 +10,10 @@ const getSingleBankInformationFromDB = async (userData) => {
   const result = await BankInformation.findOne({ user: userData.userId });
   return result;
 };
+const getOperatorBankInfoFromDB = async (id) => {
+  const result = await BankInformation.findOne({ user: id });
+  return result;
+};
 const updateBankInformationIntoDB = async (userData, payload) => {
   const userId = userData?.userId;
   let update;
@@ -32,5 +36,6 @@ const updateBankInformationIntoDB = async (userData, payload) => {
 module.exports = {
   createBankInformationIntoDB,
   updateBankInformationIntoDB,
+  getOperatorBankInfoFromDB,
   getSingleBankInformationFromDB,
 };

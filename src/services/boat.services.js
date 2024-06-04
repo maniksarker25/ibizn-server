@@ -165,16 +165,21 @@ const getAllPendingBoatsFromDB = async () => {
   const result = await Boat.find(
     { status: "pending" },
     { nameOfProperty: true, status: true }
-  );
+  ).populate({ path: "user", model: "User" });
   return result;
 };
 
 // get single boat from db
 const getSingleBoatFromDB = async (id) => {
-  const result = await Boat.findById(id).populate({
-    path: "schedules.itinerary",
-    model: "Itinerary", // Make sure to replace 'Itinerary' with the actual model name
-  });
+  const result = await Boat.findById(id)
+    .populate({
+      path: "schedules.itinerary",
+      model: "Itinerary",
+    })
+    .populate({
+      path: "user",
+      model: "User",
+    });
 
   return result;
 };
