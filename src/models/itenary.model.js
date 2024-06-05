@@ -9,6 +9,10 @@ const cabinsSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  cabinPicture: {
+    type: String,
+    require: true,
+  },
 });
 
 const itinerarySchema = new mongoose.Schema(
@@ -48,10 +52,10 @@ const itinerarySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    boatDailySchedule: {
-      type: String,
-      required: true,
-    },
+    // boatDailySchedule: {
+    //   type: String,
+    //   required: true,
+    // },
     numberOfDays: {
       type: Number,
       required: true,

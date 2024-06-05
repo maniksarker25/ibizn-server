@@ -15,6 +15,10 @@ const packageSchema = new Schema(
       type: Number,
       required: true,
     },
+    numberOfNight: {
+      type: Number,
+      required: true,
+    },
     roomType: {
       type: String,
       required: true,
@@ -43,10 +47,10 @@ const packageSchema = new Schema(
       type: Number,
       required: true,
     },
-    resortDailySchedule: {
-      type: String,
-      required: true,
-    },
+    // resortDailySchedule: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   {
     timestamps: true,

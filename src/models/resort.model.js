@@ -236,6 +236,10 @@ const resortSchema = new Schema(
     environmentalQuestions: {
       type: environmentalQuestionSchema,
     },
+    resortDailySchedule: {
+      type: String,
+      required: true,
+    },
     special: {
       type: Boolean,
       default: false,
