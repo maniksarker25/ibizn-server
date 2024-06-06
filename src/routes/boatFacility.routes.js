@@ -13,7 +13,7 @@ const {
 const boatFacilityRoutes = express.Router();
 
 boatFacilityRoutes.post("/", auth("admin"), createBoatFacility);
-boatFacilityRoutes.get("/", auth("admin", "operator"), getAllBoatFacility);
+boatFacilityRoutes.get("/", getAllBoatFacility);
 boatFacilityRoutes.delete("/:id", auth("admin"), deleteBoatFacility);
 
 module.exports = boatFacilityRoutes;

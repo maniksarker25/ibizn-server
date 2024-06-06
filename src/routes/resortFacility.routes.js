@@ -8,11 +8,7 @@ const auth = require("../config/auth");
 const resortFacilityRoutes = express.Router();
 
 resortFacilityRoutes.post("/", auth("admin"), createFacility);
-resortFacilityRoutes.get(
-  "/",
-  auth("admin", "operator"),
-  getAllResortFacilities
-);
+resortFacilityRoutes.get("/", getAllResortFacilities);
 resortFacilityRoutes.delete("/:id", auth("admin"), deleteResortFacility);
 
 module.exports = resortFacilityRoutes;
