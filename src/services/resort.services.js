@@ -13,8 +13,14 @@ const getResortsFromDB = async (id) => {
 
 // get all resorts from db
 const getAllResortFromDB = async (queryData) => {
+  console.log("query data", queryData);
   const { destination, date, minRating, maxRating } = queryData;
   const andCondition = [];
+
+  andCondition.push({
+    status: "approved",
+    resitricted: false,
+  });
   if (destination) {
     andCondition.push({ country: destination });
   }
@@ -28,8 +34,13 @@ const getAllResortFromDB = async (queryData) => {
       ],
     });
   }
+  // Add veganRating condition if provided
+  if (minRating !== "" && maxRating !== "") {
+    console.log("raing");
+    andCondition.push({ veganRating: { $gte: minRating, $lte: maxRating } });
+  }
 
-  // console.log(JSON.stringify(andCondition, null, 2));
+  console.log(JSON.stringify(andCondition, null, 2));
 
   const result = await Resort.find({
     $and: andCondition.length > 0 ? andCondition : [{}],
