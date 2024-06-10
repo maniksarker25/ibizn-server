@@ -13,7 +13,7 @@ const {
   getBoatSearchItem,
 } = require("../controllers/boat.controllers");
 const boatRoutes = express.Router();
-
+//some changes
 boatRoutes.post("/create-boat", auth("operator"), createBoat);
 boatRoutes.get("/all-boats", getAllBoat);
 boatRoutes.get("/", auth("operator"), getBoats);
