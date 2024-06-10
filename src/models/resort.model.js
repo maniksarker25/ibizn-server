@@ -98,21 +98,21 @@ const environmentalQuestionSchema = {
 };
 
 // schema for rooms ----------
-const roomSchema = new Schema(
-  {
-    description: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
+// const roomSchema = new Schema(
+//   {
+//     description: {
+//       type: String,
+//       required: true,
+//     },
+//     image: {
+//       type: String,
+//       required: true,
+//     },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
 
 // deactivationPeriod schema
 const deactivationPeriodSchema = new Schema({
@@ -207,10 +207,10 @@ const resortSchema = new Schema(
       required: true,
     },
 
-    rooms: {
-      type: roomSchema,
-      required: true,
-    },
+    // rooms: {
+    //   type: roomSchema,
+    //   required: true,
+    // },
     inclusions: {
       type: [String],
       required: true,

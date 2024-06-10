@@ -14,7 +14,7 @@ const getResortsFromDB = async (id) => {
 // get all resorts from db
 const getAllResortFromDB = async (queryData) => {
   console.log("query data", queryData);
-  const { destination, date, minRating, maxRating } = queryData;
+  const { destination, tabValue, date, minRating, maxRating } = queryData;
   const andCondition = [];
 
   andCondition.push({
@@ -23,6 +23,10 @@ const getAllResortFromDB = async (queryData) => {
   });
   if (destination) {
     andCondition.push({ country: destination });
+  }
+  if (tabValue === "Special Offers") {
+    console.log("console from tab value");
+    andCondition.push({ special: true });
   }
 
   if (date) {
@@ -36,7 +40,6 @@ const getAllResortFromDB = async (queryData) => {
   }
   // Add veganRating condition if provided
   if (minRating !== "" && maxRating !== "") {
-    console.log("raing");
     andCondition.push({ veganRating: { $gte: minRating, $lte: maxRating } });
   }
 
