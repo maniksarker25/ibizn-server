@@ -17,6 +17,22 @@ const localBankSchema = new Schema(
       type: String,
       required: true,
     },
+    accountHolderAddress: {
+      type: String,
+      required: true,
+    },
+    accountIbanNumber: {
+      type: String,
+      required: true,
+    },
+    swiftCode: {
+      type: String,
+      required: true,
+    },
+    accountHolderContact: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

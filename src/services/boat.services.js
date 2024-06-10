@@ -49,7 +49,10 @@ const getAllBoatFromDB = async (queryData) => {
   const { destination, date, minRating, maxRating } = queryData;
 
   // Initialize an empty query object
-  const query = {};
+  const query = {
+    status: "approved",
+    resitricted: false,
+  };
 
   // Add destination condition if provided
   if (destination) {

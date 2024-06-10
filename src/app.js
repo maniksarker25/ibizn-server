@@ -4,8 +4,8 @@ const cors = require("cors");
 // parser
 // app.use(express.json());
 app.use(express.json({ limit: "30mb" }));
-app.use(cors({ origin: "https://next-ibizn.vercel.app" }));
-// app.use(cors({ origin: "http://localhost:3000" }));
+// app.use(cors({ origin: "https://next-ibizn.vercel.app" }));
+app.use(cors({ origin: "http://localhost:3000" }));
 // make some changes
 // import all routes ---------
 
@@ -27,6 +27,7 @@ const boatInclusionRoutes = require("./routes/boatInclusion.routes");
 const boatEquipmentRoutes = require("./routes/boatEquipment.routes");
 const boatDiveCourseRoutes = require("./routes/boatDiveCourse.routes");
 const bankInformationRoutes = require("./routes/bankInformation.routes");
+const sendEmailRoutes = require("./routes/sendEmail.routes");
 
 // use all routes -----9---------
 // some changes
@@ -47,6 +48,8 @@ app.use("/api/boat-exclusions", boatExclusionRoutes);
 app.use("/api/boat-equipments", boatEquipmentRoutes);
 app.use("/api/boat-dive-courses", boatDiveCourseRoutes);
 app.use("/api/bank-information", bankInformationRoutes);
+//
+app.use("/api/send-email", sendEmailRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
