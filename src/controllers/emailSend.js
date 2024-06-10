@@ -1,12 +1,12 @@
 const httpStatus = require("http-status");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
-const { transporter } = require("../config/smtp");
+const transporter = require("../config/smtp");
 
 const sendSignUpRequestEmail = catchAsync(async (req, res) => {
   const payload = req.body;
   const { name, email, message } = payload;
-
+  console.log(email);
   // Creating the HTML email message
   const htmlMessage = `
       <div>
@@ -19,8 +19,8 @@ const sendSignUpRequestEmail = catchAsync(async (req, res) => {
 
   // Sending the email
   const mailer = await transporter.sendMail({
-    from: email, // sender address
-    to: "maniksarker.official@gmail.com", // list of receivers
+    from: email,
+    to: "maniksarker652@gmail.com", // list of receivers
     subject: "New Sign Up Request", // Subject line
     html: htmlMessage, // html body
   });
@@ -29,7 +29,7 @@ const sendSignUpRequestEmail = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Email sent successfully",
-    data: result,
+    data: null,
   });
 });
 
@@ -59,7 +59,7 @@ const sendContactUsRequestEmail = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Email sent successfully",
-    data: result,
+    data: null,
   });
 });
 

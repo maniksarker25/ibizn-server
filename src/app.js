@@ -27,7 +27,7 @@ const boatInclusionRoutes = require("./routes/boatInclusion.routes");
 const boatEquipmentRoutes = require("./routes/boatEquipment.routes");
 const boatDiveCourseRoutes = require("./routes/boatDiveCourse.routes");
 const bankInformationRoutes = require("./routes/bankInformation.routes");
-const sendEmailRoutes = require("./routes/sendEmail");
+const sendEmailRoutes = require("./routes/sendEmail.routes");
 
 // use all routes -----9---------
 // some changes
@@ -49,7 +49,7 @@ app.use("/api/boat-equipments", boatEquipmentRoutes);
 app.use("/api/boat-dive-courses", boatDiveCourseRoutes);
 app.use("/api/bank-information", bankInformationRoutes);
 //
-app.use("/send-email", sendEmailRoutes);
+app.use("/api/send-email", sendEmailRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
