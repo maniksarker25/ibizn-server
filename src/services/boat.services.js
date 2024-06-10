@@ -46,8 +46,8 @@ const createBoatIntoDB = async (userData, payload) => {
 
 // another ------------
 const getAllBoatFromDB = async (queryData) => {
-  const { destination, date, minRating, maxRating } = queryData;
-
+  const { tabValue, destination, date, minRating, maxRating } = queryData;
+  console.log("queryData", queryData);
   // Initialize an empty query object
   const query = {
     status: "approved",
@@ -94,8 +94,22 @@ const getAllBoatFromDB = async (queryData) => {
 
   // Add veganRating condition if provided
   if (minRating !== "" && maxRating !== "") {
-    console.log("raing");
     query.veganRating = { $gte: minRating, $lte: maxRating };
+  }
+  // Add special offers condition if tabValue is "Special Offers"
+  if (tabValue === "Special Offers") {
+    if (query.schedules && query.schedules.$elemMatch) {
+      query.schedules.$elemMatch = {
+        ...query.schedules.$elemMatch,
+        special: true,
+      };
+    } else {
+      query.schedules = {
+        $elemMatch: {
+          special: true,
+        },
+      };
+    }
   }
 
   // Query the Boat collection with the constructed query

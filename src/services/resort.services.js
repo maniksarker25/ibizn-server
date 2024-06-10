@@ -39,7 +39,8 @@ const getAllResortFromDB = async (queryData) => {
     });
   }
   // Add veganRating condition if provided
-  if (minRating !== "" && maxRating !== "") {
+  if (minRating && maxRating) {
+    console.log("ratingggg");
     andCondition.push({ veganRating: { $gte: minRating, $lte: maxRating } });
   }
 
@@ -47,7 +48,7 @@ const getAllResortFromDB = async (queryData) => {
 
   const result = await Resort.find({
     $and: andCondition.length > 0 ? andCondition : [{}],
-  });
+  }).populate("listOfPackages");
 
   return result;
 };
