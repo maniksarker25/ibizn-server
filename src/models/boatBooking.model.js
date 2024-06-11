@@ -29,7 +29,7 @@ const boatBookingSchema = new Schema(
       required: true,
     },
     price: {
-      type: number,
+      type: Number,
       required: true,
     },
     startDate: {
@@ -39,6 +39,14 @@ const boatBookingSchema = new Schema(
     endDate: {
       type: Date,
       required: true,
+    },
+    numberOfGuest: {
+      type: Number,
+      required: true,
+    },
+    bookingStatus: {
+      type: String,
+      default: "pending",
     },
   },
   {
