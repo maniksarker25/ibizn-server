@@ -5,6 +5,7 @@ const {
   getAllPendingBoatBookingFromDB,
   getSingleBoatBookingFromDB,
   updateBookingIntoDB,
+  updateBookingStatusByAdminFromDB,
 } = require("../services/boatBooking.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -48,10 +49,22 @@ const updateBooking = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const updateBookingStatusByAdmin = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const status = req.body.status;
+  const result = await updateBookingStatusByAdminFromDB(id, status);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Booking updated successfully",
+    data: result,
+  });
+});
 
 module.exports = {
   createBoatBooking,
   getAllBoatBooking,
   getSingleBoatBooking,
   updateBooking,
+  updateBookingStatusByAdmin,
 };

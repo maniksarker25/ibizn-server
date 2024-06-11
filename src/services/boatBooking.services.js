@@ -1,5 +1,6 @@
 const BoatBooking = require("../models/boatBooking.model");
 const transporter = require("../config/smtp");
+const AppError = require("../error/appError");
 const createBoatBookingIntoDB = async (payload) => {
   const result = await BoatBooking.create(payload);
   const htmlMessage = `
@@ -26,7 +27,10 @@ const getAllPendingBoatBookingFromDB = async (userData) => {
   console.log(userData);
   if (userData?.role === "admin") {
     const result = await BoatBooking.find({
-      bookingStatus: { $ne: "confirmed" },
+      $and: [
+        { bookingStatus: { $ne: "confirmed" } },
+        { bookingStatus: { $ne: "rejected" } },
+      ],
     }).populate({
       path: "property", // First level: populates the property field
       populate: {
@@ -67,9 +71,27 @@ const updateBookingIntoDB = async (id, payload) => {
   return result;
 };
 
+const updateBookingStatusByAdminFromDB = async (id, status) => {
+  console.log(status);
+  const booking = await BoatBooking.findById(id);
+  if (!booking) {
+    throw new AppError("Booking not found");
+  }
+  const result = await BoatBooking.findByIdAndUpdate(
+    id,
+    { bookingStatus: status },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  return result;
+};
+
 module.exports = {
   createBoatBookingIntoDB,
   getAllPendingBoatBookingFromDB,
   getSingleBoatBookingFromDB,
   updateBookingIntoDB,
+  updateBookingStatusByAdminFromDB,
 };
