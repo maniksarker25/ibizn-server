@@ -28,6 +28,7 @@ const boatEquipmentRoutes = require("./routes/boatEquipment.routes");
 const boatDiveCourseRoutes = require("./routes/boatDiveCourse.routes");
 const bankInformationRoutes = require("./routes/bankInformation.routes");
 const sendEmailRoutes = require("./routes/sendEmail.routes");
+const boatBookingRoutes = require("./routes/boatBooking.routes");
 
 // use all routes -----9---------
 // some changes
@@ -48,6 +49,7 @@ app.use("/api/boat-exclusions", boatExclusionRoutes);
 app.use("/api/boat-equipments", boatEquipmentRoutes);
 app.use("/api/boat-dive-courses", boatDiveCourseRoutes);
 app.use("/api/bank-information", bankInformationRoutes);
+app.use("/api/boat-booking", boatBookingRoutes);
 //
 app.use("/api/send-email", sendEmailRoutes);
 app.get("/", (req, res) => {
